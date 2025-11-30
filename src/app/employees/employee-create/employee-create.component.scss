@@ -1,0 +1,16 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 350px;
+}
+
+input, select {
+  padding: 6px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 8px;
+  cursor: pointer;
+}

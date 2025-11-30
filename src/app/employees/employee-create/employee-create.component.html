@@ -1,0 +1,29 @@
+<h2>Create Employee</h2>
+
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+
+  <label>First Name</label>
+  <input formControlName="firstName" placeholder="Enter first name">
+
+  <label>Last Name</label>
+  <input formControlName="lastName" placeholder="Enter last name">
+
+  <label>Email</label>
+  <input formControlName="email" type="email" placeholder="Enter email">
+
+  <label>Role</label>
+  <select formControlName="role">
+    <option value="ADMIN">Admin</option>
+    <option value="HR">HR</option>
+    <option value="EMPLOYEE">Employee</option>
+  </select>
+
+  <label>Department (optional)</label>
+  <input formControlName="department">
+
+  <label>Position (optional)</label>
+  <input formControlName="position">
+
+  <button type="submit" [disabled]="employeeForm.invalid">Create Employee</button>
+
+</form>
