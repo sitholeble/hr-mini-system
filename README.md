@@ -6,7 +6,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 - Node.js and npm installed
 
-## Mock Backend Mode 🎭
+## Mock Backend Mode
 
 **Good news!** This application includes a **mock backend** feature, so you can develop and test the frontend without needing a real backend server.
 
