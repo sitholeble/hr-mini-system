@@ -13,8 +13,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './employee-create.component.scss'
 })
 export class EmployeeCreateComponent {
-
   employeeForm!: FormGroup;
+  error: string | null = null;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -37,16 +38,38 @@ export class EmployeeCreateComponent {
 
   onSubmit() {
     if (this.employeeForm.valid) {
-      const employee: User = this.employeeForm.value;
-
+      this.error = null;
+      this.loading = true;
+      
       this.employeeService.createEmployee(this.employeeForm.value).subscribe({
         next: () => {
-          alert('Employee created successfully!');
-        this.router.navigate(['/employees']);
+          this.loading = false;
+          this.router.navigate(['/employees']);
         },
         error: (err: any) => {
+          this.loading = false;
           console.error('Error creating employee:', err);
-          alert('Failed to create employee. Please try again.');
+          
+          // Extract detailed error message
+          let errorMessage = 'Failed to create employee. ';
+          
+          if (err.status === 0) {
+            errorMessage += 'Cannot connect to the server. Please ensure the backend is running on http://localhost:8080';
+          } else if (err.status === 400) {
+            errorMessage += err.error?.message || 'Invalid data provided. Please check your input.';
+          } else if (err.status === 409) {
+            errorMessage += 'An employee with this email already exists.';
+          } else if (err.status === 500) {
+            errorMessage += 'Server error. Please try again later.';
+          } else if (err.error?.message) {
+            errorMessage += err.error.message;
+          } else if (err.message) {
+            errorMessage += err.message;
+          } else {
+            errorMessage += 'Please try again.';
+          }
+          
+          this.error = errorMessage;
         }
       });
     }

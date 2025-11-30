@@ -2,6 +2,77 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
 
+## Prerequisites
+
+- Node.js and npm installed
+
+## Mock Backend Mode 🎭
+
+**Good news!** This application includes a **mock backend** feature, so you can develop and test the frontend without needing a real backend server.
+
+### Using Mock Backend
+
+The application is **currently configured to use a mock backend** by default. This means:
+- You can use all features immediately without setting up a backend
+- Data is stored in-memory (will reset on page refresh)
+- All API endpoints are simulated with realistic delays
+- You'll see a yellow banner at the top indicating mock mode
+
+To enable/disable mock mode, edit `src/environments/environment.ts`:
+
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080/api',
+  mockBackend: true  
+};
+```
+
+**Note**: Mock backend data is stored in memory and will be lost when you refresh the page. When you're ready to connect to a real backend, set `mockBackend: false`.
+
+## Real Backend Setup
+
+When you're ready to connect to a real backend API server, the application is configured to connect to:
+
+- **API URL**: `http://localhost:8080/api`
+
+### To configure a different API URL:
+
+Edit the environment file: `src/environments/environment.ts`
+
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://your-backend-url:port/api'
+};
+```
+
+### Expected API Endpoints:
+
+The frontend expects the following endpoints:
+
+- `GET /api/employees` - Get all employees
+- `POST /api/employees` - Create a new employee
+- `GET /api/employees/:id` - Get employee by ID
+- `PUT /api/employees/:id` - Update employee
+- `DELETE /api/employees/:id` - Delete employee
+
+### Employee Data Model:
+
+The backend should accept and return employee data in this format:
+
+```typescript
+{
+  id?: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: "ADMIN" | "HR" | "EMPLOYEE";
+  department?: string;
+  position?: string;
+}
+```
+
 ## Development server
 
 To start a local development server, run:

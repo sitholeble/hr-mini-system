@@ -3,7 +3,12 @@
   
   <a routerLink="/employees" class="back-link">← Back to Employees</a>
 
-  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="employee-form">
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+    <button (click)="error = null" class="close-error">×</button>
+  </div>
+
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="employee-form" [class.loading]="loading">
     <div class="form-group">
       <label for="firstName">First Name *</label>
       <input 
@@ -61,8 +66,11 @@
     </div>
 
     <div class="form-actions">
-      <button type="button" routerLink="/employees" class="btn btn-secondary">Cancel</button>
-      <button type="submit" [disabled]="employeeForm.invalid" class="btn btn-primary">Create Employee</button>
+      <button type="button" routerLink="/employees" class="btn btn-secondary" [disabled]="loading">Cancel</button>
+      <button type="submit" [disabled]="employeeForm.invalid || loading" class="btn btn-primary">
+        <span *ngIf="loading">Creating...</span>
+        <span *ngIf="!loading">Create Employee</span>
+      </button>
     </div>
   </form>
 </div>
