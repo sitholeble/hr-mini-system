@@ -1,29 +1,68 @@
-<h2>Create Employee</h2>
+<div class="employee-create-container">
+  <h2>Create Employee</h2>
+  
+  <a routerLink="/employees" class="back-link">← Back to Employees</a>
 
-<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="employee-form">
+    <div class="form-group">
+      <label for="firstName">First Name *</label>
+      <input 
+        id="firstName"
+        formControlName="firstName" 
+        placeholder="Enter first name"
+        [class.invalid]="employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched">
+      <span *ngIf="employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched" class="error-text">
+        First name is required
+      </span>
+    </div>
 
-  <label>First Name</label>
-  <input formControlName="firstName" placeholder="Enter first name">
+    <div class="form-group">
+      <label for="lastName">Last Name *</label>
+      <input 
+        id="lastName"
+        formControlName="lastName" 
+        placeholder="Enter last name"
+        [class.invalid]="employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched">
+      <span *ngIf="employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched" class="error-text">
+        Last name is required
+      </span>
+    </div>
 
-  <label>Last Name</label>
-  <input formControlName="lastName" placeholder="Enter last name">
+    <div class="form-group">
+      <label for="email">Email *</label>
+      <input 
+        id="email"
+        formControlName="email" 
+        type="email" 
+        placeholder="Enter email"
+        [class.invalid]="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched">
+      <span *ngIf="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched" class="error-text">
+        Valid email is required
+      </span>
+    </div>
 
-  <label>Email</label>
-  <input formControlName="email" type="email" placeholder="Enter email">
+    <div class="form-group">
+      <label for="role">Role *</label>
+      <select id="role" formControlName="role">
+        <option value="EMPLOYEE">Employee</option>
+        <option value="HR">HR</option>
+        <option value="ADMIN">Admin</option>
+      </select>
+    </div>
 
-  <label>Role</label>
-  <select formControlName="role">
-    <option value="ADMIN">Admin</option>
-    <option value="HR">HR</option>
-    <option value="EMPLOYEE">Employee</option>
-  </select>
+    <div class="form-group">
+      <label for="department">Department (optional)</label>
+      <input id="department" formControlName="department" placeholder="Enter department">
+    </div>
 
-  <label>Department (optional)</label>
-  <input formControlName="department">
+    <div class="form-group">
+      <label for="position">Position (optional)</label>
+      <input id="position" formControlName="position" placeholder="Enter position">
+    </div>
 
-  <label>Position (optional)</label>
-  <input formControlName="position">
-
-  <button type="submit" [disabled]="employeeForm.invalid">Create Employee</button>
-
-</form>
+    <div class="form-actions">
+      <button type="button" routerLink="/employees" class="btn btn-secondary">Cancel</button>
+      <button type="submit" [disabled]="employeeForm.invalid" class="btn btn-primary">Create Employee</button>
+    </div>
+  </form>
+</div>

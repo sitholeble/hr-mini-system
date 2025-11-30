@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeService } from '../services/employee.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { User } from '../../shared/models/user';
-import { ReactiveFormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common'; 
 
 @Component({
   selector: 'app-employee-create',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
   templateUrl: './employee-create.component.html',
   styleUrl: './employee-create.component.scss'
 })
@@ -28,6 +29,7 @@ export class EmployeeCreateComponent {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      role: ['EMPLOYEE', Validators.required],
       department: [''],
       position: ['']
     });
