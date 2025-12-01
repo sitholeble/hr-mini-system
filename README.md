@@ -125,6 +125,40 @@ ng e2e
 
 Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
+## CI/CD Pipeline (Basic POC)
+
+This project includes a simple CI pipeline for testing and building the application.
+
+### Workflow
+
+- **CI** (`.github/workflows/ci.yml`): Runs on every push to `main` and pull requests
+  - Installs dependencies
+  - Runs unit tests
+  - Builds the application for production
+  - Uploads build artifacts (downloadable for 7 days)
+
+### Quick Start
+
+The CI pipeline is ready to use! Just push your code and it will run automatically.
+
+1. **Push your code:**
+   ```bash
+   git push origin main
+   ```
+
+2. **View the workflow:**
+   - Go to your GitHub repository
+   - Click the "Actions" tab
+   - See your workflow running in real-time
+
+### Status Badge
+
+Add this to your README to show workflow status:
+
+```markdown
+![CI](https://github.com/sitholeble/hr-mini-system/workflows/CI/badge.svg)
+```
+
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
