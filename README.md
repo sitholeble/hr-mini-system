@@ -127,7 +127,7 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 
 ## CI/CD Pipeline (Basic POC)
 
-This project includes a simple CI pipeline for testing and building the application.
+This project includes a simple CI pipeline for testing, building, and creating Docker images.
 
 ### Workflow
 
@@ -136,6 +136,22 @@ This project includes a simple CI pipeline for testing and building the applicat
   - Runs unit tests
   - Builds the application for production
   - Uploads build artifacts (downloadable for 7 days)
+  - **Builds Docker image** (on push to `main` only)
+  - Uploads Docker image as artifact (downloadable for 7 days)
+
+### Docker Support
+
+The project includes Docker support with a multi-stage Dockerfile:
+- **Builder stage**: Builds the Angular app using Node.js
+- **Production stage**: Serves the app using nginx (alpine)
+
+**Build and run locally:**
+```bash
+docker build -t hr-mini-system:latest .
+docker run -d -p 8080:80 hr-mini-system:latest
+```
+
+Access the application at `http://localhost:8080`
 
 ### Quick Start
 
