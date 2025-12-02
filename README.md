@@ -155,7 +155,25 @@ Access the application at `http://localhost:8080`
 
 ### Quick Start
 
-The CI pipeline is ready to use! Just push your code and it will run automatically.
+#### Run Pipeline Locally
+
+Test the entire CI/CD pipeline locally before pushing:
+
+```bash
+# Run the full pipeline (tests, build, Docker)
+./run-pipeline.sh
+
+# Or using npm script
+npm run pipeline
+```
+
+The script will:
+- Install dependencies
+- Run unit tests
+- Build the application
+- Build Docker image (if Docker is installed)
+
+#### Run Pipeline on GitHub
 
 1. **Push your code:**
    ```bash
